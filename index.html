@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>MediTrack – Your Personal Health Record</title>
+<link rel="stylesheet" href="style.css" />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<!-- SCREEN 1: Welcome / Login -->
+<div id="screen-welcome" class="screen active">
+<div class="welcome-bg"></div>
+<div class="welcome-card">
+<div class="logo">🩺 MediTrack</div>
+<p class="tagline">Your personal health companion</p>
+<input type="text" id="login-name" placeholder="Enter your name to continue" />
+<button onclick="login()">Get Started</button>
+</div>
+</div>
+
+<!-- SCREEN 2: Dashboard -->
+<div id="screen-dashboard" class="screen">
+
+<nav class="navbar">
+<div class="logo">🩺 MediTrack</div>
+<div class="nav-right">
+<span id="nav-username"></span>
+<button class="btn-small" onclick="switchUser()">Switch User</button>
+</div>
+</nav>
+
+<div class="dashboard">
+
+<!-- Tabs -->
+<div class="tabs">
+<button class="tab active" onclick="showTab('tab-records', this)">📋 My Records</button>
+<button class="tab" onclick="showTab('tab-medicines', this)">💊 Medicines</button>
+<button class="tab" onclick="showTab('tab-appointments', this)">📅 Appointments</button>
+<button class="tab" onclick="showTab('tab-reminders', this)">🔔 Reminders</button>
+</div>
+
+<!-- TAB: Medical Records -->
+<div id="tab-records" class="tab-content active">
+<div class="section-header">
+<h2>My Medical Records</h2>
+<button class="btn-add" onclick="openModal('modal-record')">+ Add Record</button>
+</div>
+<div id="records-list" class="card-grid"></div>
+</div>
+
+<!-- TAB: Medicines -->
+<div id="tab-medicines" class="tab-content">
+<div class="section-header">
+<h2>My Medicines</h2>
+<button class="btn-add" onclick="openModal('modal-medicine')">+ Add Medicine</button>
+</div>
+<div id="medicines-list" class="card-grid"></div>
+</div>
+
+<!-- TAB: Appointments -->
+<div id="tab-appointments" class="tab-content">
+<div class="section-header">
+<h2>My Appointments</h2>
+<button class="btn-add" onclick="openModal('modal-appointment')">+ Add Appointment</button>
+</div>
+<div id="appointments-list" class="card-grid"></div>
+</div>
+
+<!-- TAB: Reminders -->
+<div id="tab-reminders" class="tab-content">
+<div class="section-header">
+<h2>Today's Reminders</h2>
+</div>
+<div id="reminders-list" class="card-grid"></div>
+</div>
+
+</div>
+</div>
+
+<!-- MODAL: Add Record -->
+<div id="modal-record" class="modal-overlay">
+<div class="modal">
+<h3>Add Medical Record</h3>
+<input type="text" id="rec-title" placeholder="Record title (e.g. Blood Test)" />
+<input type="date" id="rec-date" />
+<input type="text" id="rec-doctor" placeholder="Doctor name" />
+<textarea id="rec-notes" placeholder="Notes / diagnosis"></textarea>
+<div class="modal-btns">
+<button onclick="saveRecord()">Save</button>
+<button class="btn-cancel" onclick="closeModal('modal-record')">Cancel</button>
+</div>
+</div>
+</div>
+
+<!-- MODAL: Add Medicine -->
+<div id="modal-medicine" class="modal-overlay">
+<div class="modal">
+<h3>Add Medicine</h3>
+<input type="text" id="med-name" placeholder="Medicine name" />
+<input type="text" id="med-dose" placeholder="Dosage (e.g. 500mg)" />
+<input type="time" id="med-time" />
+<select id="med-freq">
+<option value="daily">Daily</option>
+<option value="twice">Twice a day</option>
+<option value="weekly">Weekly</option>
+</select>
+<div class="modal-btns">
+<button onclick="saveMedicine()">Save</button>
+<button class="btn-cancel" onclick="closeModal('modal-medicine')">Cancel</button>
+</div>
+</div>
+</div>
+
+<!-- MODAL: Add Appointment -->
+<div id="modal-appointment" class="modal-overlay">
+<div class="modal">
+<h3>Add Appointment</h3>
+<input type="text" id="apt-doctor" placeholder="Doctor name" />
+<input type="text" id="apt-hospital" placeholder="Hospital / Clinic" />
+<input type="date" id="apt-date" />
+<input type="time" id="apt-time" />
+<textarea id="apt-notes" placeholder="Reason for visit"></textarea>
+<div class="modal-btns">
+<button onclick="saveAppointment()">Save</button>
+<button class="btn-cancel" onclick="closeModal('modal-appointment')">Cancel</button>
+</div>
+</div>
+</div>
+
+<!-- Notification Toast -->
+<div id="toast" class="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
